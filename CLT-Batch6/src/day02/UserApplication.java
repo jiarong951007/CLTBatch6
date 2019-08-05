@@ -20,7 +20,7 @@ public class UserApplication {
 		System.out.println("Enter age : ");
 		int userAge = sc.nextInt(); // take data from console and store to userAge
 		
-		User refUser = new User();
+		/*User refUser = new User();
 		
 		refUser.setUserID(userID);
 		refUser.setUserPassword(userPassword);
@@ -30,7 +30,7 @@ public class UserApplication {
 		
 		System.out.println(refUser.getUserID()+" "+refUser.getUserPassword()+" "+refUser.getAge());
 		sc.close();
-		
+		*/
 		
 	} // end of main()
 	

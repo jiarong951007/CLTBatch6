@@ -6,6 +6,8 @@ import pojo.User;
 import service.LoginService;
 import service.LoginServiceImpl;
 
+	//Option 2: Login
+
 public class LoginController {
 	
 	LoginService refLoginService; // LoginService is an interface
@@ -36,6 +38,6 @@ public class LoginController {
 		refLoginService.checkStatus(refUser);
 	}
 	
-	
+	//end of Option 2
 
 }
