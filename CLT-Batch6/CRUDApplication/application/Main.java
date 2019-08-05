@@ -18,11 +18,12 @@ public class Main {
 			System.out.println("1.Add Employee");
 			System.out.println("2.Update Employee");
 			System.out.println("3.List Employee");
-			System.out.println("4.Delete Employee");
+			System.out.println("4.Get Employee by ID");
+			System.out.println("5.Delete Employee");
 			
 			System.out.println("\nEnter Your Choice:");
 
-			int n = sc.nextInt(); //to enter the options 1,2,3 or 4. 
+			int n = sc.nextInt(); //to enter the options 1,2,3,4 or 5. 
 			
 			switch(n)
 			{
@@ -37,7 +38,16 @@ public class Main {
 			case 3:
 			adminControllerRef.userListEmployee();
 			break;
+			
+			case 4:
+			adminControllerRef.findEmployeeByID();
+			break;
+			
+			case 5:
+			adminControllerRef.userDeleteEmployee();
+			break;
 			}
+			
 			}		
 
 	}

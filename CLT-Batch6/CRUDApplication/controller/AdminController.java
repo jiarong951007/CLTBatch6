@@ -68,13 +68,37 @@ public class AdminController {
 			
 			refEmployee = new Employee();
 			refEmployeeService = new EmployeeServiceImpl();
+			
+			refEmployeeService.callListEmployee(refEmployee);
+		
+		}
+
+	public void findEmployeeByID() {
+			
+			refEmployee = new Employee();
+			refEmployeeService = new EmployeeServiceImpl();
+		
 			Scanner sc = new Scanner(System.in);
 			
 			System.out.println("Enter your Employee ID");
 			int employeeID = sc.nextInt();
 			refEmployee.setEmployeeID(employeeID); 
-			
-			
+
+			refEmployeeService.callFindEmployeeByID(refEmployee);
 		}
+
+	public void userDeleteEmployee() {
+		refEmployee = new Employee();
+		refEmployeeService = new EmployeeServiceImpl();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter your Employee ID");
+		int employeeID = sc.nextInt();
+		refEmployee.setEmployeeID(employeeID); 
+		
+	
+	refEmployeeService.callDeleteEmployee(refEmployee);
+		
+	}
 
 }

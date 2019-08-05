@@ -33,4 +33,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		 refEmployeeDAO.listEmployee(refEmployee);
 
 	}
+
+
+public void callFindEmployeeByID(Employee refEmployee) {
+	
+		refEmployeeDAO = new EmployeeDAOImpl();
+	
+		refEmployeeDAO.findEmployee(refEmployee);
+	
+}
+
+
+public void callDeleteEmployee(Employee refEmployee) {
+
+	refEmployeeDAO = new EmployeeDAOImpl();
+
+	refEmployeeDAO.deleteEmployee(refEmployee);
+
+	
+}
+
 }

@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 import dao.MyConnection;
 import pojo.Employee;
 
@@ -19,7 +22,7 @@ import pojo.Employee;
 				
 			}
 		
-		@Override
+	
 		public void addEmployee(Employee refEmployee) {
 			getConnection(); 
 			
@@ -48,7 +51,7 @@ import pojo.Employee;
 		
 		}
 
-		@Override
+	
 		public void updateEmployee(Employee refEmployee) {
 			getConnection();
 			
@@ -79,17 +82,26 @@ import pojo.Employee;
 		
 		}
 
-		@Override
-		public void listEmployee(Employee refEmployee) {
+		
+		public List <Employee> listEmployee(Employee refEmployee) {
 			getConnection();
 			
 			try { 
-				psRef= conRef.prepareStatement("SELECT * FROM employee WHERE employeeid =?");
-				psRef.setInt(1,refEmployee.getEmployeeID());
+				psRef= conRef.prepareStatement("SELECT * FROM employee");
+				ResultSet rs = psRef.executeQuery();
+				System.out.println("\n\n");
+				System.out.println("EmployeeID\t"+"Name"+"\t\t"+"Password"+"\t"+"DOB");
+				System.out.println("=========================================================");
 				
-				psRef.executeUpdate();
-				System.out.println("Employee is listed");
-			}
+				if(rs.next()) {
+				do {
+					System.out.println(rs.getInt(1)+"\t\t"+rs.getString(2)+"\t\t"+rs.getString(3)+"\t\t"+rs.getString(4)+"\n\n"); }
+			
+					while(rs.next());
+					
+				}
+				}
+			
 			catch (SQLException e) {
 				System.out.println("Unable to list employee");
 			}
@@ -101,71 +113,72 @@ import pojo.Employee;
 				}
 			}
 			
-		}
-	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			
-	/*public List<Employee> listEmployees; 
-	
-	// this will show all the employees 
-	public List<Employee> listEmployee() {
-		return listEmployees;
-	}*/
-	
-		/* public static void main(String[] args) throws ClassNotFoundException, SQLException {
-			
-			//call your prepareConnection() from MyConnection class
-			Connection con = MyConnection.prepareConnection();
-			
-		//Execute a query
-			System.out.println("Creating a table in given database...");
-			Statement st = con.createStatement();
-			
-			
-			//create table
-			String sql = "CREATE TABLE employees " +
-			"(employeeid INTEGER not NULL, " +
-					" name VARCHAR(35), "+
-			" password VARCHAR(15), " +
-			" dob VARCHAR(15), " +
-					" PRIMARY KEY (employeeid))"; 
-			
-			
-			st.executeUpdate(sql); // for saving purpose
-			System.out.println("Created table in given database..."); 
+			List<Employee> list = null;
+			return list;
 			
 		}
-	    
-		//insert employee into table
-		public void addEmployee(Employee refEmployee) {
-		String sql = "INSERT INTO employees(employeeid, name, password, dob) values (?,?,?)";
-		
-		st.executeUpdate(sql);
-		
-		System.out.println("Data Inserted Successfully.."); 
-		
-	/*
-	// this method will update the existing employees detail		
-	public void updateEmployee(Employee ref) {
-		
-	}
-	public void getEmployeeByID(int id) {
-	
+		public void findEmployee(Employee refEmployee) {
+			getConnection();
+			
+			try { 
+				psRef= conRef.prepareStatement("SELECT * FROM employee where employeeID = ?");
+				psRef.setInt(1,refEmployee.getEmployeeID());
+				
+				ResultSet rs = psRef.executeQuery();
+				System.out.println("\n\n");
+				System.out.println("EmployeeID\t"+"Name"+"\t\t"+"Password"+"\t"+"DOB");
+				System.out.println("=========================================================");
+				
+				if(rs.next()) {
+				do {
+					System.out.println(rs.getInt(1)+"\t\t"+rs.getString(2)+"\t\t"+rs.getString(3)+"\t\t"+rs.getString(4)+"\n\n"); }
+			
+					while(rs.next());
+					
+				}
+				}
+			
+			catch (SQLException e) {
+				System.out.println("Unable to find employee");
+			}
+			finally {
+				try {
+					conRef.close();
+				} catch (SQLException e) {
+					System.out.println("Exception caught");
+				}
+			}
+			
 		}
+	
+		public void deleteEmployee(Employee refEmployee) {
+				getConnection();
+				
+				try {
+					psRef = conRef.prepareStatement("DELETE FROM employee where employeeid = ?");
+					psRef.setInt(1,refEmployee.getEmployeeID());
 
-	public void removeEmployee(int id) {
-	
-		
+					
+					psRef.executeUpdate();
+					System.out.println("Employee "+refEmployee.getEmployeeID()+" record deleted successfully!");
+				}
+				catch (SQLException e) {
+					System.out.println("Unable to delete employee record...");
+				}
+				finally {
+					
+					try {
+						conRef.close();
+					} catch (SQLException e) {
+						System.out.println("Exception caught");			
+					
+			
+		}
 	}
-*/
-
+		}
+		}
 		
-	
+		
+		
+		
+		
